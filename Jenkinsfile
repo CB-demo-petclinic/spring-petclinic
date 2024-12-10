@@ -20,9 +20,6 @@ pipeline {
             // Grab the pod name for the controller that kicks off the job
             env.controllerPodName = System.getenv('HOSTNAME')
             echo "Controller Pod Name extracted: ${env.controllerPodName}"
-            // Grab the job name from the environment variable
-            env.jobName = env.JOB_NAME
-            echo "Job Name extracted: ${env.jobName}"
           }
         }
     }
@@ -44,7 +41,7 @@ pipeline {
                   sh 'java --version'
                   sh 'echo $HOME'
                   sh './mvnw clean package -Dcheckstyle.skip'
-                  sh "ls -l /home/jenkins/agent/workspace/${env.JOB_NAME}/target/"
+                  sh "ls -l ${WORKSPACE}/target/"
                   stash name: 'petclinic-jar', includes: 'target/spring-petclinic-3.3.0-SNAPSHOT.jar '
                 }
               }  
