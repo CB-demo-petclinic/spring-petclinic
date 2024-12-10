@@ -26,7 +26,7 @@ pipeline {
     stage('Build & Scan') {
       agent{
         kubernetes {
-          inheritFrom 'maven-app'
+          //inheritFrom 'maven-app'
           yaml mvnPodYaml
         }
       }
@@ -49,7 +49,7 @@ pipeline {
             stage('Kubectl Pod Cleanup') {
               agent {
                 kubernetes {
-                  inheritFrom 'kubectl'
+                  //inheritFrom 'kubectl'
                   yaml kubectlPodYaml
                 }
               }
